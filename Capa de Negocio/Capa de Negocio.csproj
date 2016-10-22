@@ -51,7 +51,6 @@
     <Compile Include="DocumentoCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Vendedor.cs" />
-    <Compile Include="VendedorCollection.cs" />
     <Compile Include="Vino.cs" />
     <Compile Include="VinoCollection.cs" />
   </ItemGroup>

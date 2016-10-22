@@ -39,6 +39,7 @@ namespace Capa_de_Negocio
             try
             {
                 Capa_de_Datos.Vino nuevoVino = new Capa_de_Datos.Vino();
+
                 nuevoVino.Codigo = this.Codigo;
                 nuevoVino.Nombre = this.Nombre;
                 nuevoVino.Color = this.Color;
@@ -61,7 +62,8 @@ namespace Capa_de_Negocio
         {
             try
             {
-                Capa_de_Datos.Vino vino = Common.ModeloMyWine.Vino.First(f => f.Codigo == this.Codigo);
+                Capa_de_Datos.Vino vino = Common.ModeloMyWine.Vino.First
+                    (f => f.Codigo == this.Codigo);
 
                 this.Codigo = vino.Codigo;
                 this.Nombre = vino.Nombre;
@@ -83,7 +85,8 @@ namespace Capa_de_Negocio
         {
             try
             {
-                Capa_de_Datos.Vino vino = Common.ModeloMyWine.Vino.First(f => f.Codigo == this.Codigo);
+                Capa_de_Datos.Vino vino = Common.ModeloMyWine.Vino.First
+                    (f => f.Codigo == this.Codigo);
 
                 vino.Codigo = this.Codigo;
                 vino.Nombre = this.Nombre;
@@ -105,7 +108,8 @@ namespace Capa_de_Negocio
         {
             try
             {
-                Capa_de_Datos.Vino vino = Common.ModeloMyWine.Vino.First(f => f.Codigo == this.Codigo);
+                Capa_de_Datos.Vino vino = Common.ModeloMyWine.Vino.First
+                    (f => f.Codigo == this.Codigo);
 
                 Common.ModeloMyWine.Vino.Remove(vino);
                 Common.ModeloMyWine.SaveChanges();

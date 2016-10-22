@@ -87,7 +87,12 @@
             <td class="auto-style4">
                 <asp:Button ID="btnCrear" runat="server" Text="Crear Vendedor" OnClick="btnCrear_Click" />
             </td>
-            <td>&nbsp;</td>
+            <td>
+                <asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="EntityDataSource1" DataTextField="Rut" DataValueField="Rut">
+                </asp:DropDownList>
+                <asp:EntityDataSource ID="EntityDataSource1" runat="server" ConnectionString="name=MyWineDBEntities" DefaultContainerName="MyWineDBEntities" EnableFlattening="False" EntitySetName="Vendedor" Select="it.[Rut]">
+                </asp:EntityDataSource>
+            </td>
         </tr>
         <tr>
             <td colspan="3">
