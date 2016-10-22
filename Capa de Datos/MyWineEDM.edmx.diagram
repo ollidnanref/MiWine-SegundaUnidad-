@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e14b86adb75e40c98234746fabe9fd63" Name="Diagram1">
+        <EntityTypeShape EntityType="MyWineDBModel.DetalleDocumento" Width="1.5" PointX="4.25" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyWineDBModel.Documento" Width="1.5" PointX="1.5" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyWineDBModel.Vendedor" Width="1.5" PointX="1.5" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyWineDBModel.Vino" Width="1.5" PointX="4.25" PointY="0.875" IsExpanded="true" />
+        <AssociationConnector Association="MyWineDBModel.Detalle_Documento_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="MyWineDBModel.Detalle_Vino_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="MyWineDBModel.Documento_Vendedor_FK" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,285 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MyWineDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DetalleDocumento">
+          <Key>
+            <PropertyRef Name="Documento" />
+            <PropertyRef Name="Vino" />
+          </Key>
+          <Property Name="Documento" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Vino" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="Cantidad" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Documento">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Tipo" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Fecha" Type="date" Nullable="false" />
+          <Property Name="Vendedor" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vendedor">
+          <Key>
+            <PropertyRef Name="Rut" />
+          </Key>
+          <Property Name="Rut" Type="int" Nullable="false" />
+          <Property Name="Dv" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ApellidoPaterno" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ApellidoMaterno" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Direccion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Correo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Telefono" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vino">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Color" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Ano" Type="int" Nullable="false" />
+          <Property Name="Precio" Type="int" Nullable="false" />
+          <Property Name="Existencia" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="Detalle_Documento_FK">
+          <End Role="Documento" Type="Self.Documento" Multiplicity="1" />
+          <End Role="DetalleDocumento" Type="Self.DetalleDocumento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Documento">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="DetalleDocumento">
+              <PropertyRef Name="Documento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Detalle_Vino_FK">
+          <End Role="Vino" Type="Self.Vino" Multiplicity="1" />
+          <End Role="DetalleDocumento" Type="Self.DetalleDocumento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vino">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="DetalleDocumento">
+              <PropertyRef Name="Vino" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Documento_Vendedor_FK">
+          <End Role="Vendedor" Type="Self.Vendedor" Multiplicity="1" />
+          <End Role="Documento" Type="Self.Documento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vendedor">
+              <PropertyRef Name="Rut" />
+            </Principal>
+            <Dependent Role="Documento">
+              <PropertyRef Name="Vendedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MyWineDBModelStoreContainer">
+          <EntitySet Name="DetalleDocumento" EntityType="Self.DetalleDocumento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Documento" EntityType="Self.Documento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vendedor" EntityType="Self.Vendedor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vino" EntityType="Self.Vino" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="Detalle_Documento_FK" Association="Self.Detalle_Documento_FK">
+            <End Role="Documento" EntitySet="Documento" />
+            <End Role="DetalleDocumento" EntitySet="DetalleDocumento" />
+          </AssociationSet>
+          <AssociationSet Name="Detalle_Vino_FK" Association="Self.Detalle_Vino_FK">
+            <End Role="Vino" EntitySet="Vino" />
+            <End Role="DetalleDocumento" EntitySet="DetalleDocumento" />
+          </AssociationSet>
+          <AssociationSet Name="Documento_Vendedor_FK" Association="Self.Documento_Vendedor_FK">
+            <End Role="Vendedor" EntitySet="Vendedor" />
+            <End Role="Documento" EntitySet="Documento" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MyWineDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="DetalleDocumento">
+          <Key>
+            <PropertyRef Name="Documento" />
+            <PropertyRef Name="Vino" />
+          </Key>
+          <Property Name="Documento" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Vino" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cantidad" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Documento1" Relationship="Self.Detalle_Documento_FK" FromRole="DetalleDocumento" ToRole="Documento" />
+          <NavigationProperty Name="Vino1" Relationship="Self.Detalle_Vino_FK" FromRole="DetalleDocumento" ToRole="Vino" />
+        </EntityType>
+        <EntityType Name="Documento">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Tipo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Vendedor" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DetalleDocumento" Relationship="Self.Detalle_Documento_FK" FromRole="Documento" ToRole="DetalleDocumento" />
+          <NavigationProperty Name="Vendedor1" Relationship="Self.Documento_Vendedor_FK" FromRole="Documento" ToRole="Vendedor" />
+        </EntityType>
+        <EntityType Name="Vendedor">
+          <Key>
+            <PropertyRef Name="Rut" />
+          </Key>
+          <Property Name="Rut" Type="Int32" Nullable="false" />
+          <Property Name="Dv" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ApellidoPaterno" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ApellidoMaterno" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Correo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Telefono" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Documento" Relationship="Self.Documento_Vendedor_FK" FromRole="Vendedor" ToRole="Documento" />
+        </EntityType>
+        <EntityType Name="Vino">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Color" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Ano" Type="Int32" Nullable="false" />
+          <Property Name="Precio" Type="Int32" Nullable="false" />
+          <Property Name="Existencia" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DetalleDocumento" Relationship="Self.Detalle_Vino_FK" FromRole="Vino" ToRole="DetalleDocumento" />
+        </EntityType>
+        <Association Name="Detalle_Documento_FK">
+          <End Role="Documento" Type="Self.Documento" Multiplicity="1" />
+          <End Role="DetalleDocumento" Type="Self.DetalleDocumento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Documento">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="DetalleDocumento">
+              <PropertyRef Name="Documento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Detalle_Vino_FK">
+          <End Role="Vino" Type="Self.Vino" Multiplicity="1" />
+          <End Role="DetalleDocumento" Type="Self.DetalleDocumento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vino">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="DetalleDocumento">
+              <PropertyRef Name="Vino" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Documento_Vendedor_FK">
+          <End Role="Vendedor" Type="Self.Vendedor" Multiplicity="1" />
+          <End Role="Documento" Type="Self.Documento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vendedor">
+              <PropertyRef Name="Rut" />
+            </Principal>
+            <Dependent Role="Documento">
+              <PropertyRef Name="Vendedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MyWineDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DetalleDocumento" EntityType="Self.DetalleDocumento" />
+          <EntitySet Name="Documento" EntityType="Self.Documento" />
+          <EntitySet Name="Vendedor" EntityType="Self.Vendedor" />
+          <EntitySet Name="Vino" EntityType="Self.Vino" />
+          <AssociationSet Name="Detalle_Documento_FK" Association="Self.Detalle_Documento_FK">
+            <End Role="Documento" EntitySet="Documento" />
+            <End Role="DetalleDocumento" EntitySet="DetalleDocumento" />
+          </AssociationSet>
+          <AssociationSet Name="Detalle_Vino_FK" Association="Self.Detalle_Vino_FK">
+            <End Role="Vino" EntitySet="Vino" />
+            <End Role="DetalleDocumento" EntitySet="DetalleDocumento" />
+          </AssociationSet>
+          <AssociationSet Name="Documento_Vendedor_FK" Association="Self.Documento_Vendedor_FK">
+            <End Role="Vendedor" EntitySet="Vendedor" />
+            <End Role="Documento" EntitySet="Documento" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MyWineDBModelStoreContainer" CdmEntityContainer="MyWineDBEntities">
+          <EntitySetMapping Name="DetalleDocumento">
+            <EntityTypeMapping TypeName="MyWineDBModel.DetalleDocumento">
+              <MappingFragment StoreEntitySet="DetalleDocumento">
+                <ScalarProperty Name="Documento" ColumnName="Documento" />
+                <ScalarProperty Name="Vino" ColumnName="Vino" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Documento">
+            <EntityTypeMapping TypeName="MyWineDBModel.Documento">
+              <MappingFragment StoreEntitySet="Documento">
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Vendedor" ColumnName="Vendedor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vendedor">
+            <EntityTypeMapping TypeName="MyWineDBModel.Vendedor">
+              <MappingFragment StoreEntitySet="Vendedor">
+                <ScalarProperty Name="Rut" ColumnName="Rut" />
+                <ScalarProperty Name="Dv" ColumnName="Dv" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vino">
+            <EntityTypeMapping TypeName="MyWineDBModel.Vino">
+              <MappingFragment StoreEntitySet="Vino">
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Ano" ColumnName="Ano" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Existencia" ColumnName="Existencia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
